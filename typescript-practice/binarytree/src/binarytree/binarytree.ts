@@ -36,4 +36,9 @@ export class BinaryTree<T> implements IBinaryTree<T> {
         throw new Error("Method not implemented.");
     }
 
+    balance(): void {
+        throw new Error("Method not implemented.");
+        
+    }
+
 }

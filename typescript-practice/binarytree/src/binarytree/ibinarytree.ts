@@ -4,4 +4,5 @@ export interface IBinaryTree<T> {
     traversePostOrder(): T[];
     invert(): void;
     search(data: T): boolean;
+    balance(): void;
 }
