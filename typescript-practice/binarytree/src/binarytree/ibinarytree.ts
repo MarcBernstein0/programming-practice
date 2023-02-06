@@ -3,7 +3,7 @@ export interface IBinaryTree<T> {
     traverseInOrder(): T[];
     traversePreOrder(): T[];
     traversePostOrder(): T[];
-    invert(): void;
+    invert(): IBinaryTree<T>;
     search(data: T): boolean;
     balance(): void;
 }

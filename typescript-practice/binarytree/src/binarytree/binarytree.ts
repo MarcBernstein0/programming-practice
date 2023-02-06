@@ -108,8 +108,27 @@ export class BinaryTree<T> implements IBinaryTree<T> {
 
         return res;
     }
-    invert(): void {
-        throw new Error("Method not implemented.");
+    
+    invert(): BinaryTree<T> {
+        if (!this.root) {
+            return new BinaryTree<T>;
+        }
+        const invertTree = (root: BTNode<T> | null): BTNode<T> | null => {
+            if (!root) {
+                return null
+            }
+            const right = invertTree(root.right);
+            const left = invertTree(root.left);
+            root.left = right;
+            root.right = left;
+            return root;
+        }
+
+        const invertedTree: BinaryTree<T> = new BinaryTree<T>();
+        const newRoot = invertTree(this.root);
+        invertedTree.root = newRoot;
+
+        return invertedTree;
     }
 
     balance(): void {
