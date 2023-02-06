@@ -91,7 +91,7 @@ export class BinaryTree<T> implements IBinaryTree<T> {
             return [];
         }
         let res: T[] = [];
-        const stack: (BTNode<T> | null) [] = [this.root];
+        const stack: (BTNode<T> | null)[] = [this.root];
 
         while (stack.length) {
             const curr = stack.pop();
@@ -108,7 +108,7 @@ export class BinaryTree<T> implements IBinaryTree<T> {
 
         return res;
     }
-    
+
     invert(): BinaryTree<T> {
         if (!this.root) {
             return new BinaryTree<T>;
@@ -132,8 +132,25 @@ export class BinaryTree<T> implements IBinaryTree<T> {
     }
 
     balance(): void {
-        throw new Error("Method not implemented.");
+        const inorderList = this.traverseInOrder();
 
+        const buildTree = (nodes: T[], start: number, end: number): BTNode<T> | null => {
+            if (start > end) {
+                return null;
+            }
+
+            const mid = Math.round((start + end) / 2);
+            const root = new BTNode(nodes[mid]);
+            
+            root.left = buildTree(nodes, start, mid - 1);
+            root.right = buildTree(nodes, mid + 1, end);
+
+            return root;
+        }
+
+        const newRoot = buildTree(inorderList, 0, inorderList.length - 1);
+
+        this.root = newRoot;
     }
 
 }
